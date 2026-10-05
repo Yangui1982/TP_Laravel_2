@@ -13,14 +13,25 @@
   @endif
 
   <div class="row">
-    @forelse($competences as $competence)
-      <x-carte-competence :slug="$competence->slug" :nom="$competence->nom" :niveau="$competence->niveau" :description="$competence->description" :numero="$loop->iteration"/>
-    @empty
-      <div class="col-12">
-        <div class="alert alert-info">
-            Aucune compétence disponible.
-        </div>
-      </div>
-    @endforelse
-  </div>
+   	@foreach($competences as $competence)
+     	<div class="col-md-4 mb-3">
+     	  <div class="card h-100">
+         	<div class="card-body">
+           	<h2 class="card-title h5">
+             	<a href="{{ route('competences.show', $competence) }}">{{ $competence->nom }}</a>
+           	</h2>
+           	<span class="badge bg-secondary">{{ $competence->niveau }}</span>
+           	<div class="mt-3 d-flex gap-2">
+             	<a href="{{ route('competences.edit', $competence) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+             	<form action="{{ route('competences.destroy', $competence) }}" method="POST" onsubmit="return confirm('Supprimer cette compétence ?');">
+               	@csrf
+               	@method('DELETE')
+               	<button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+             	</form>
+           	</div>
+         	</div>
+       	</div>
+     	</div>
+   	@endforeach
+	</div>
 @endsection
