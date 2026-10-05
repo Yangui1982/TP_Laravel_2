@@ -1,0 +1,10 @@
+body {
+    background-color: #f8f9fa;
+}
+
+main {
+    background-color: white;
+    min-height: 500px;
+    padding: 30px;
+    border-radius: 8px;
+}
